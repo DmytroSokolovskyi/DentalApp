@@ -1,0 +1,7 @@
+# Project exclude paths
+/backend/node_modules/
+node_modules
+mongo_db
+.idea
+.env
+db.env
