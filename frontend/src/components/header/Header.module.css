@@ -1,0 +1,23 @@
+.headerDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.contentHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 11vh;
+    width: 100%;
+    /*background-color: green;*/
+}
+
+.menuHeader {
+    height: 100%;
+    width: 100%;
+    background-color: red;
+}
