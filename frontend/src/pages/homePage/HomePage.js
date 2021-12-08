@@ -1,5 +1,7 @@
 import Header from "../../components/header/Header";
 import cl from "./HomePage.module.css";
+import {Route, Switch} from "react-router-dom";
+import DoctorPage from "../doctorPage/DoctorPage";
 
 export default function HomePage () {
     const elem = document.getElementsByTagName("header");
@@ -16,68 +18,13 @@ export default function HomePage () {
                 <header>
                     <Header/>
                 </header>
-                <content>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                    <div>dddd</div>
-                </content>
-
-                {/* <usersSide> */}
-                {/*    <UserSide/> */}
-                {/* </usersSide> */}
-
-                {/* <Switch> */}
-                {/*    <Route exact={true} path={"/create"} component={FormCreate}/> */}
-                {/*    <Route exact={true} path={"/edit/:id"} component={FormCreate}/> */}
-                {/* </Switch> */}
+                <contentSide>
+                    <DoctorPage/>
+                    {/* <Switch> */}
+                    {/*    <Route exact={true} path={"/create"} component={FormCreate}/> */}
+                    {/*    <Route exact={true} path={"/edit/:id"} component={FormCreate}/> */}
+                    {/* </Switch> */}
+                </contentSide>
                 <footer>
                     footer
                 </footer>

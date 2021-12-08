@@ -6,7 +6,7 @@ const {actionTokenTypeEnum} = require('../configs/');
 
 module.exports = {
     generateTokenPair: () => {
-        const access_token = jwt.sign({}, config.JWT_ACCESS_SECRET, { expiresIn: '1h' });
+        const access_token = jwt.sign({}, config.JWT_ACCESS_SECRET, { expiresIn: '1m' });
         const refresh_token = jwt.sign({},config.JWT_REFRESH_SECRET, { expiresIn: '30d' });
 
         return { access_token, refresh_token };

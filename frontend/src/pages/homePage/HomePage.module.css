@@ -5,7 +5,7 @@
     overflow: hidden;
 }
 
-header, main, footer, content {
+header, main, footer, contentSide {
     display: flex;
     margin-top: 1rem;
     align-items: center;
@@ -35,7 +35,7 @@ header {
     overflow: hidden;
 }
 
-content {
+contentSide {
     width: 100%;
     flex-direction: column;
     justify-content: center;

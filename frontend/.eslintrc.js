@@ -21,9 +21,9 @@ module.exports = {
         "object-curly-spacing": [1, "never"],
         "comma-dangle": [1, "always-multiline"],
         curly: [2, "multi-line"],
-        "no-unused-vars": [2, {
-            vars: "all", args: "none",
-        }],
+        // "no-unused-vars": [2, {
+        //     vars: "all", args: "none",
+        // }],
         "no-mixed-requires": [1],
         "space-before-function-paren": ["error", {
             anonymous: "always", named: "always", asyncArrow: "ignore",
@@ -42,5 +42,7 @@ module.exports = {
         camelcase: "off",
         "no-restricted-imports": "error",
         "sort-imports": "warn",
+        "no-unused-vars": "warn",
+        "no-unused-expressions": "warn",
     },
 };

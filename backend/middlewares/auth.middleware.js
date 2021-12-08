@@ -1,5 +1,5 @@
 const { jwtService } = require('../service');
-const { errorsEnum, constants, actionTokenTypeEnum} = require('../configs');
+const { errorsEnum, constants, actionTokenTypeEnum, tokenEnum} = require('../configs');
 const Doctors = require('../dataBase/Doctors');
 
 module.exports = {
@@ -27,6 +27,10 @@ module.exports = {
     checkToken: (tableName ,tokenType) => async (req, res, next) => {
         try {
             let token = req.get(constants.AUTHORIZATION);
+
+            if (tokenType ===tokenEnum.REFRESH) {
+                token = req.get(tokenEnum.REFRESH);
+            }
 
             if (tokenType === actionTokenTypeEnum.ACTIVATE_ACCOUNT) {
                 token = req.params.token;
