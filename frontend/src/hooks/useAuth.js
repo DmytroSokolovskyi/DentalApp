@@ -1,3 +1,4 @@
+import {deleteUser, setUser} from "../redux/actions";
 import {
     destroyAuthToLocal,
     destroyTokens,
@@ -10,7 +11,6 @@ import {
 } from "../services";
 import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../context";
-import {deleteUser, setUser} from "../redux/actions";
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router";
 
@@ -39,14 +39,16 @@ export const useAuth = () => {
             setLoading(true);
             const res = await login(logPass);
 
-            setIsAuth(true);
-            saveTokens(res.access_token, res.refresh_token);
-            // saveAuthToLocal(true, res.clearUser);
-            dispatch(setUser(res.clearUser));
+            if (res) {
+                setIsAuth(true);
+                saveTokens(res.access_token, res.refresh_token);
+                saveAuthToLocal(true, res.clearUser);
+                dispatch(setUser(res.clearUser));
 
-            // history.push("/");
+                setLoading(false);
+            }
 
-            setLoading(true);
+            setError("Неправильний логiн або пароль");
         } catch (e) {
             setError(e.message);
             setLoading(false);

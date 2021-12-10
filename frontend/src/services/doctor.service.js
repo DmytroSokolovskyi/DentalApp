@@ -1,11 +1,9 @@
 import {axiosInstance, doctorUrl} from "./config";
 
 export const getVisits = async () => {
-    const res = await axiosInstance.get(doctorUrl);
+    const data = (await axiosInstance.get(doctorUrl)).data;
 
-    console.log(res);
-
-    return res;
+    return data;
 };
 
 // export const logOut = (accessToken) => {

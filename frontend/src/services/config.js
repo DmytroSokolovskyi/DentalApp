@@ -15,22 +15,23 @@ export const config = {
 
 export const axiosInstance = axios.create(config);
 
+let _retry = false;
+
 axiosInstance.interceptors.response.use(
     (res) => res,
     async (error) => {
         const config = error.config;
 
         if (config.url !== "/auth/login" && error.response) {
-            if (error.response.status === 401 && !config._retry) {
-                config._retry = true;
+            if (error.response.status === 401 && !_retry) {
+                _retry = true;
+
                 try {
                     const res = await axiosInstance.get("/auth/refresh", {
                         headers: {
                             refresh_token: getToken("refresh_token"),
                         },
                     });
-
-                    console.log(res);
 
                     const {access_token, refresh_token} = res.data;
                     saveTokens(access_token, refresh_token);
@@ -41,7 +42,6 @@ axiosInstance.interceptors.response.use(
                 }
             }
         }
-
         return Promise.reject(error);
     },
 );

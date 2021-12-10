@@ -9,7 +9,7 @@ module.exports = async () => {
             name: 'Admin',
             email: config.ADMIN_EMAIL,
             phone: config.ADMIN_NUMBER,
-            password: 'fsFD43!dsadxzc',
+            password: config.ADMIN_PASS,
             role: rolesEnum.ADMIN,
             activate: true
         });

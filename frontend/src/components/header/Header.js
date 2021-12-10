@@ -5,6 +5,7 @@ import cl from "./Header.module.css";
 import {useAuth} from "../../hooks/useAuth";
 import {useContext} from "react";
 import {useHistory} from "react-router";
+import MenuHeaderDoctor from "../menuHeaderDoctor/MenuHeaderDoctor";
 
 export default function Header () {
     const history = useHistory();
@@ -22,12 +23,16 @@ export default function Header () {
     return (
         <div className={cl.headerDiv}>
             <div className={cl.contentHeader}>
-                <MyButton onClick={isAuth ? logOut : login }>
-                    {isAuth ? "LogOut" : "LOGIN"}
-                </MyButton>
+                <div className={cl.logoDiv}>LOGO</div>
+                <div className={cl.contactDiv}>CONTACT</div>
+                <div className={cl.buttonDiv}>
+                    <MyButton onClick={isAuth ? logOut : login }>
+                        {isAuth ? "LogOut" : "LOGIN"}
+                    </MyButton>
+                </div>
             </div>
             <div className={cl.menuHeader}>
-                <MenuHeader/>
+                {isAuth ? <MenuHeaderDoctor/> : <MenuHeader/>}
             </div>
         </div>
     );

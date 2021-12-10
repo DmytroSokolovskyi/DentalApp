@@ -19,14 +19,14 @@ doctorRouter.post('/visit', doctorController.createVisit);
 doctorRouter.delete(
     '/client/:client_id',
     // mainMiddleware.validateId('client_id'),
-    // mainMiddleware.getOneById(Clients, 'client_id'),
+    // mainMiddleware.getOneById(Teethes, 'client_id'),
     doctorController.deleteClientById
 );
 doctorRouter.delete('/visit', () => 'del visit');
 doctorRouter.get(
     '/client/:client_id',
     // mainMiddleware.validateId('client_id'),
-    // mainMiddleware.getOneById(Clients, 'client_id'),
+    // mainMiddleware.getOneById(Teethes, 'client_id'),
     doctorController.getClientById
 );
 doctorRouter.put('/client/:client_id', () => 'edit client');

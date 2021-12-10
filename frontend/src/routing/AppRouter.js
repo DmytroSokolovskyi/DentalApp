@@ -18,7 +18,7 @@ export default function AppRouter () {
     return (
         isAuth
             ? <Switch>
-                <Route exact path={"/"} component={HomePage}/>
+                <Route path={"/"} component={HomePage}/>
                 <Route exact path={"/error"} component={ErrorPage2}/>
                 <Redirect to={"/"}/>
             </Switch>

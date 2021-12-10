@@ -1,7 +1,6 @@
 import Header from "../../components/header/Header";
+import HomeRouter from "../../routing/HomeRouter";
 import cl from "./HomePage.module.css";
-import {Route, Switch} from "react-router-dom";
-import DoctorPage from "../doctorPage/DoctorPage";
 
 export default function HomePage () {
     const elem = document.getElementsByTagName("header");
@@ -19,11 +18,7 @@ export default function HomePage () {
                     <Header/>
                 </header>
                 <contentSide>
-                    <DoctorPage/>
-                    {/* <Switch> */}
-                    {/*    <Route exact={true} path={"/create"} component={FormCreate}/> */}
-                    {/*    <Route exact={true} path={"/edit/:id"} component={FormCreate}/> */}
-                    {/* </Switch> */}
+                    <HomeRouter/>
                 </contentSide>
                 <footer>
                     footer

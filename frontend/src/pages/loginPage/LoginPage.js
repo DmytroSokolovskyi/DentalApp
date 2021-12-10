@@ -10,7 +10,7 @@ export default function LoginPage () {
     const email = useInput("", {isEmpty: true, isEmail: true});
     const password = useInput("", {isEmpty: true, isPassword: true});
     const validForm = useFormValid(email, password);
-    const {loading, goLogin} = useAuth();
+    const {loading, goLogin, error} = useAuth();
 
     const clickLogin = (e) => {
         e.preventDefault();
@@ -28,6 +28,7 @@ export default function LoginPage () {
     return (
         <div className={cl.loginPageDiv}>
             <h2>Вхiд в кабiнет</h2>
+            <span>{error}</span>
             <form >
                 <MyInput
                     type="email"

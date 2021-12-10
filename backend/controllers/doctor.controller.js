@@ -4,7 +4,6 @@ const Client = require('../dataBase/Clients');
 module.exports = {
     getVisits: async (req, res, next) => {
         try {
-            console.log('QWERTY');
             const visits = await Visits.find();
             res.json(visits);
         } catch (e) {

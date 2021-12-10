@@ -6,7 +6,7 @@ const initialState = {
     loginUser: {},
 };
 
-export const userReducer = (state = initialState, action) => {
+export const mainReducer = (state = initialState, action) => {
     switch (action.type) {
     // case SET_CHOSE_USER: {
     //     return {...state, choseUser: {...action.payload}};

@@ -1,0 +1,19 @@
+.menuButtonDiv {
+    height: 80%;
+    min-width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1px;
+    background-color: #e1dcdc;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.menuButtonDiv:hover {
+    background: #cae1e1;
+    font-size: 18px;
+    color: #282020;
+    width: 13vh;
+    height: 5vh;
+}

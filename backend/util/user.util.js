@@ -8,10 +8,11 @@ const userNormalizator = (userToNormalize = {}) => {
     return userToNormalize;
 };
 class DoctorNormalize {
-    constructor({ _id, name, email, role, activate }) {
+    constructor({ _id, name, email, phone, role, activate }) {
         this._id = _id;
         this.name = name;
         this.email = email;
+        this.phone = phone;
         this.role = role;
         this.activate = activate;
     }

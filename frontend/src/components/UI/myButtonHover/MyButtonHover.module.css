@@ -1,0 +1,34 @@
+.myButtonHoverDiv {
+    height: 50%;
+    position: relative;
+    /*background: #b8bbbb;*/
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    border: none;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    border-radius: 2%;
+}
+
+.myButtonHoverDiv span {
+    position: relative;
+}
+
+.myButtonHoverDiv:before {
+    --size: 0;
+    content: '';
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--size);
+    height: var(--size);
+    background: radial-gradient(circle closest-side, #95d3d5, transparent);
+    transform: translate(-50%, -50%);
+    transition: width 0.2s ease, height 0.2s ease;
+}
+
+.myButtonHoverDiv:hover:before {
+    --size: 200px;
+}
