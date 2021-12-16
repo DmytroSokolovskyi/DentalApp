@@ -1,7 +1,6 @@
 @import "src/assets/css/mainStyle";
 
 .clientsDiv {
-  //background-color: #d3d3d9;
   height: 100%;
   width: 100%;
   @extend %flex_center
@@ -15,13 +14,11 @@
 
   .clientsList {
     @extend %flex_center;
-    //background-color: #949191;
     flex-direction: column;
     justify-content: start;
     width: 60%;
-    padding: 5px;
+    padding: 30px 5px 5px 5px;
   }
-
   .clientsForm {
     @extend %flex_center;
     width: 40%;
@@ -34,11 +31,11 @@
   background-color: #f2f5f6;
   display: flex;
   align-items:center;
-  padding-left: 5%;
-  //justify-content: space-around;
+  justify-content: space-between;
 }
 
 .clientsNav span {
+  //background-color: #0a53a8;
   display: block;
   width: 20%;
   text-transform: uppercase;
@@ -47,4 +44,5 @@
   letter-spacing: 1px;
   color: #595252;
   text-shadow: 3px 3px 3px #61d2ec;
+  padding-left: 20px;
 }

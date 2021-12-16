@@ -23,9 +23,9 @@ doctorRouter.post(
 // todo createVisit
 doctorRouter.post('/visit', doctorController.createVisit);
 doctorRouter.delete(
-    '/client/:client_id',
-    // mainMiddleware.validateId('client_id'),
-    // mainMiddleware.getOneById(Teethes, 'client_id'),
+    '/client/:_id',
+    authMiddleware.checkToken(O_Auth, tokenEnum.ACCESS),
+    mainMiddleware.checkUserIdMiddleware(Clients),
     doctorController.deleteClientById
 );
 doctorRouter.delete('/visit', () => 'del visit');

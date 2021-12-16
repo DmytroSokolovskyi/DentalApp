@@ -15,7 +15,7 @@ export default function ClientForm ({clickCreate, clickUpdate, chosenClient}) {
 
     useEffect(() => {
         name.setValue(chosenClient.name);
-        surname.setValue(chosenClient.name);
+        surname.setValue(chosenClient.surname);
         // phone.setValue(chosenClient.phone);
         // email.setValue(chosenClient.email);
     }, [chosenClient]);
@@ -43,7 +43,7 @@ export default function ClientForm ({clickCreate, clickUpdate, chosenClient}) {
         <div className={cl.clientFormDiv}>
             <div className={cl.clientFormContainer}>
                 <div className={cl.titleClientForm}>
-                    Створити нового пацiєнта
+                    {chosenClient.name ? "Редагувати пацiєнта" : "Створити нового пацiєнта"}
                 </div>
                 <div className={cl.bodyClientForm}>
                     <form >

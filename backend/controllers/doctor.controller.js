@@ -1,5 +1,6 @@
 const {Visits, Clients} = require('../dataBase');
 const Client = require('../dataBase/Clients');
+const {statusEnum} = require("../configs");
 
 module.exports = {
     getVisits: async (req, res, next) => {
@@ -63,10 +64,10 @@ module.exports = {
 
     deleteClientById:async (req, res, next) => {
         try {
-            const {client_id} = req.params;
-            const delUser = await Client.findByIdAndDelete(client_id);
+            const {_id} = req.params;
+            await Client.findByIdAndDelete(_id);
 
-            res.json(delUser);
+            res.sendStatus(statusEnum.NO_CONTENT);
         } catch (e) {
             next(e);
         }
