@@ -20,13 +20,13 @@ export const useValidation = (value, validations) => {
                     setErrorMessage("");
                 } else {
                     setEmpty(true);
-                    setErrorMessage("The field cannot be empty");
+                    setErrorMessage("Поле не може бути пустим");
                 }
                 break;
             case "minLength":
                 if (value && (value.length < validations[validation])) {
                     setMinLength(true);
-                    setErrorMessage(`Characters must be at least ${validations[validation]}`);
+                    setErrorMessage(`Не менше ${validations[validation]} символiв`);
                 } else {
                     setMinLength(false);
                 }
@@ -34,7 +34,7 @@ export const useValidation = (value, validations) => {
             case "maxLength":
                 if (value && (value.length > validations[validation])) {
                     setMaxLength(true);
-                    setErrorMessage(`Characters should be no more ${validations[validation]}`);
+                    setErrorMessage(`Не бiльше ${validations[validation]} символiв`);
                 } else {
                     setMaxLength(false);
                 }
@@ -45,7 +45,7 @@ export const useValidation = (value, validations) => {
                     setEmailError(false);
                 } else {
                     setEmailError(true);
-                    setErrorMessage("It's not email!");
+                    setErrorMessage(" Неправильний формат Email");
                 }
                 break;
             case "isPassword":
@@ -54,7 +54,16 @@ export const useValidation = (value, validations) => {
                     setPassError(false);
                 } else {
                     setPassError(true);
-                    setErrorMessage("This is not a valid password");
+                    setErrorMessage("Пароль Повинен складатись iз цифр букв малого та великого регiстру а також символiв № % ? !.,");
+                }
+                break;
+            case "isPhone":
+                const resPhone = /^(0\d{9,9})$/;
+                if (value && (resPhone.test(value))) {
+                    setPassError(false);
+                } else {
+                    setPassError(true);
+                    setErrorMessage("Введiть правильний номер мобiльного телефону");
                 }
                 break;
             case "isIncludes":

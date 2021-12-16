@@ -1,0 +1,57 @@
+@import "src/assets/css/mainStyle";
+
+.headerDiv {
+  height: 100%;
+  @extend %flex_center;
+}
+
+._container {
+  @extend %flex_center;
+  flex-direction: column;
+}
+
+.rowHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 8vh;
+  width: 100%;
+  height: 7vh;
+  color: #333536;
+}
+
+.rowHeader div {
+  font-size: 3vh;
+  text-align: center;
+  letter-spacing: 3px;
+  color: #595252;
+  text-shadow: 3px 3px 3px #61d2ec;
+}
+
+.logoImg {
+  max-width: 100%;
+  height: 110%;
+  position: absolute;
+  left: 3%;
+  bottom: 0%;
+  filter: invert(100%);
+  -webkit-filter: invert(100%);
+}
+
+.buttonDiv {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  position: absolute;
+  right: 2%;
+  top: 0;
+  height: 100%;
+}
+
+.nawHeader {
+  min-height: 7vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}

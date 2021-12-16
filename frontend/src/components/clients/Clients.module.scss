@@ -1,0 +1,50 @@
+@import "src/assets/css/mainStyle";
+
+.clientsDiv {
+  //background-color: #d3d3d9;
+  height: 100%;
+  width: 100%;
+  @extend %flex_center
+}
+
+.clientsContent {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  transition: all 1.8s ease 1s;
+
+  .clientsList {
+    @extend %flex_center;
+    //background-color: #949191;
+    flex-direction: column;
+    justify-content: start;
+    width: 60%;
+    padding: 5px;
+  }
+
+  .clientsForm {
+    @extend %flex_center;
+    width: 40%;
+  }
+}
+
+.clientsNav {
+  height: 5%;
+  width: 100%;
+  background-color: #f2f5f6;
+  display: flex;
+  align-items:center;
+  padding-left: 5%;
+  //justify-content: space-around;
+}
+
+.clientsNav span {
+  display: block;
+  width: 20%;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #595252;
+  text-shadow: 3px 3px 3px #61d2ec;
+}

@@ -1,6 +1,5 @@
 const {errorsEnum, statusEnum} = require('../configs');
 const {isValidObjectId} = require('mongoose');
-const {Doctors} = require('../dataBase');
 
 module.exports ={
     checkOne: (tableName, key) => async (req, res, next) => {
@@ -22,7 +21,7 @@ module.exports ={
             const {error, value} = await validator.validate(req.body);
 
             if (error) {
-                return next({message: error.details[0].message, code: statusEnum.BAD_REQUEST});
+                return next({message: error.details[0].message, status: statusEnum.BAD_REQUEST});
             }
 
             req.body = value;
@@ -69,15 +68,15 @@ module.exports ={
         }
     },
 
-    checkUserIdMiddleware: async (req, res, next) => {
+    checkUserIdMiddleware: (tableName) => async (req, res, next) => {
         try {
-            const {user_id} = req.params;
+            const {_id} = req.params;
 
-            if (!isValidObjectId(user_id)) {
+            if (!isValidObjectId(_id)) {
                 return next(errorsEnum.BAD_REQUEST);
             }
 
-            const user = await Doctors.findById(user_id).lean();
+            const user = await tableName.findById(_id).lean();
 
             if (!user) {
                 return next(errorsEnum.NOT_FOUND);

@@ -1,15 +1,21 @@
 const doctorRouter = require('express').Router();
 
-const {Clients} = require('../dataBase');
+const {Clients, O_Auth} = require('../dataBase');
 const {doctorController} = require('../controllers');
-const {mainMiddleware} = require('../middlewares');
+const {mainMiddleware, authMiddleware} = require('../middlewares');
 const {clientValidator} = require('../validators');
+const {tokenEnum} = require("../configs");
 
 
 doctorRouter.get('/', doctorController.getVisits);
-doctorRouter.get('/client', doctorController.getClients);
+doctorRouter.get(
+    '/client',
+    authMiddleware.checkToken(O_Auth, tokenEnum.ACCESS),
+    doctorController.getClients,
+);
 doctorRouter.post(
     '/client',
+    authMiddleware.checkToken(O_Auth, tokenEnum.ACCESS),
     mainMiddleware.validateBody(clientValidator.clientValidate),
     mainMiddleware.checkOne(Clients, 'phone'),
     doctorController.createClient
@@ -29,7 +35,11 @@ doctorRouter.get(
     // mainMiddleware.getOneById(Teethes, 'client_id'),
     doctorController.getClientById
 );
-doctorRouter.put('/client/:client_id', () => 'edit client');
+doctorRouter.put('/client/:_id',
+    authMiddleware.checkToken(O_Auth, tokenEnum.ACCESS),
+    mainMiddleware.validateBody(clientValidator.clientEditValidate),
+    mainMiddleware.checkUserIdMiddleware(Clients),
+    doctorController.updateClient);
 doctorRouter.put('/visit/:visit_id', () => 'edit visit');
 
 module.exports = doctorRouter;

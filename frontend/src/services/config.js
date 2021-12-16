@@ -3,6 +3,7 @@ import axios from "axios";
 
 export const apiUrl = "http://localhost:5001";
 export const doctorUrl = "/doctor";
+export const clientUrl = "/client";
 export const userUrl = "/users";
 export const authUrl = "/auth";
 

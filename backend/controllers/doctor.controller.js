@@ -40,6 +40,16 @@ module.exports = {
             next(e);
         }
     },
+    updateClient: async (req, res, next) => {
+        try {
+            const {_id} = req.params;
+            const client = await Clients.findByIdAndUpdate(_id,{...req.body}, {new: true} );
+
+            res.json(client);
+        } catch (e) {
+            next(e);
+        }
+    },
 
     createVisit: async (req, res, next) => {
         try {

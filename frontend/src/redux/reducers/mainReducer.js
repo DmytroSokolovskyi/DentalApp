@@ -1,8 +1,8 @@
-import {DELETE_USER, SET_CHOSE_USER, SET_USER, SET_USERS, UPDATE_USER} from "../actions";
+import {DELETE_USER, SET_CLIENT, SET_CLIENTS, SET_USER, UPDATE_CLIENT} from "../actions";
 
 const initialState = {
     // choseUser: {},
-    // users: [],
+    clients: [],
     loginUser: {},
 };
 
@@ -24,9 +24,12 @@ export const mainReducer = (state = initialState, action) => {
         return {...state, loginUser: {}};
     }
 
-    // case SET_USERS: {
-    //     return {...state, users: [...action.payload]};
-    // }
+    case SET_CLIENTS: {
+        return {...state, clients: [...state.clients, ...action.payload]};
+    }
+    case SET_CLIENT: {
+        return {...state, clients: [...state.clients, ...action.payload]};
+    }
     //
     // case DELETE_USER: {
     //     const filter = state.users.filter(user => user._id !== action.payload);
@@ -34,9 +37,11 @@ export const mainReducer = (state = initialState, action) => {
     //     return {...state, users: [...filter]};
     // }
     //
-    // case UPDATE_USER: {
-    //     return {...state};
-    // }
+    case UPDATE_CLIENT: {
+        const newClients = state.clients.map(client => client._id === action.payload._id ? action.payload : client);
+
+        return {...state, clients: [...newClients]};
+    }
 
     default:
         return state;

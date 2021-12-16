@@ -5,14 +5,12 @@ const {constants, rolesEnum} = require('../configs');
 const clientValidate = Joi.object({
     name: Joi
         .string()
-        .alphanum()
         .min(3)
         .max(30)
         .trim()
         .required(),
     surname: Joi
         .string()
-        .alphanum()
         .min(5)
         .max(30)
         .trim(),
@@ -32,8 +30,12 @@ const clientValidate = Joi.object({
 const clientEditValidate = Joi.object({
     name: Joi
         .string()
-        .alphanum()
         .min(2)
+        .max(30)
+        .trim(),
+    surname: Joi
+        .string()
+        .min(5)
         .max(30)
         .trim(),
     role: Joi

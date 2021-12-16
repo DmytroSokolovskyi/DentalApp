@@ -28,5 +28,6 @@ export const useInput = (initialValue, validations) => {
         clearInput,
         isDirty,
         ...valid,
+        setValue,
     };
 };

@@ -1,19 +1,46 @@
 .menuButtonDiv {
-    height: 80%;
-    min-width: 15%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 1px;
-    background-color: #e1dcdc;
-    cursor: pointer;
-    border-radius: 15px;
+    perspective:400px;
+    transform-style:preserve-3d;
 }
 
-.menuButtonDiv:hover {
-    background: #cae1e1;
-    font-size: 18px;
-    color: #282020;
-    width: 13vh;
-    height: 5vh;
+.buttonBorder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.8s ease 0s;
+    border: 1px solid #a1e3d2;
+    box-shadow: 1px 1px 1px 1px #7094d5, 5px 2px 3px 1px #23c7ec;
+    width: 60%;
+    height: 55%;
+    border-radius: 10px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.buttonImg {
+    width: 20%;
+    height: 100%;
+    background: url('../../assets/img/Nestor cut.png') 1px 3px/90% 90% no-repeat;
+}
+
+.buttonBorder span {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonBorder:hover {
+    transition: all 0.8s ease 0s;
+    width: 70%;
+    height: 60%;
+    font-size: 16px;
+    box-shadow:none;
+    border: 2px solid #23c7ec;;
+    /*transform: scale(1.2, 1.2);*/
 }

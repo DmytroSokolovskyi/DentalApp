@@ -1,19 +1,42 @@
-import {axiosInstance, doctorUrl} from "./config";
+import {axiosInstance, clientUrl, doctorUrl} from "./config";
+import {setClients, updateClient} from "../redux/actions";
 
 export const getVisits = async () => {
-    const data = (await axiosInstance.get(doctorUrl)).data;
+    try {
+        const visits = (await axiosInstance.get(doctorUrl)).data;
 
-    return data;
+        return visits;
+    } catch (e) {
+        console.log(e);
+    }
 };
 
-// export const logOut = (accessToken) => {
-//     const res = axiosInstance
-//         .get(authUrl + "/logout", accessToken)
-//         .then(value => value.status)
-//         .catch(e => console.log(e));
-//
-//     return res;
-// };
+export const getClients = () => async (dispatch) => {
+    try {
+        const res = await axiosInstance.get(doctorUrl + clientUrl);
+        dispatch(setClients(res.data));
+
+        return res;
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+export const setClient = (client) => async (dispatch) => {
+    const res = await axiosInstance.post(doctorUrl + clientUrl, client);
+    dispatch(setClient(res.data));
+
+    return res;
+};
+
+export const saveEditClient = (id, client) => async (dispatch) => {
+    const res = await axiosInstance.put(doctorUrl + clientUrl + "/" + id, client);
+
+    dispatch(updateClient(res.data));
+
+    return res;
+};
+
 //
 // export const getRefresh = (refreshToken) => {
 //     const res = axiosInstance

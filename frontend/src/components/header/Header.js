@@ -1,11 +1,12 @@
 import {AuthContext} from "../../context";
 import MenuHeader from "../menuHeader/MenuHeader";
+import MenuHeaderDoctor from "../menuHeaderDoctor/MenuHeaderDoctor";
 import MyButton from "../UI/myButton/MyButton";
-import cl from "./Header.module.css";
+import cl from "./Header.module.scss";
 import {useAuth} from "../../hooks/useAuth";
 import {useContext} from "react";
 import {useHistory} from "react-router";
-import MenuHeaderDoctor from "../menuHeaderDoctor/MenuHeaderDoctor";
+import logo from "../../assets/img/Nestordental.png";
 
 export default function Header () {
     const history = useHistory();
@@ -22,17 +23,20 @@ export default function Header () {
 
     return (
         <div className={cl.headerDiv}>
-            <div className={cl.contentHeader}>
-                <div className={cl.logoDiv}>LOGO</div>
-                <div className={cl.contactDiv}>CONTACT</div>
+            <img className={cl.logoImg} src={logo} alt="logo"/>
+            <div className={cl._container}>
+                <div className={cl.rowHeader}>
+                    <div>067-86-26-939</div>
+                    <div>067-86-26-939</div>
+                </div>
                 <div className={cl.buttonDiv}>
                     <MyButton onClick={isAuth ? logOut : login }>
                         {isAuth ? "LogOut" : "LOGIN"}
                     </MyButton>
                 </div>
-            </div>
-            <div className={cl.menuHeader}>
-                {isAuth ? <MenuHeaderDoctor/> : <MenuHeader/>}
+                <div className={cl.nawHeader}>
+                    {isAuth ? <MenuHeaderDoctor/> : <MenuHeader/>}
+                </div>
             </div>
         </div>
     );

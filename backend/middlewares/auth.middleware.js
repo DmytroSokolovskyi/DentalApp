@@ -28,6 +28,8 @@ module.exports = {
         try {
             let token = req.get(constants.AUTHORIZATION);
 
+            console.log("token" ,token);
+
             if (tokenType ===tokenEnum.REFRESH) {
                 token = req.get(tokenEnum.REFRESH);
             }

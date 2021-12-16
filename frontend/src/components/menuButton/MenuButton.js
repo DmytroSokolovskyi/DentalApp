@@ -1,4 +1,3 @@
-import MySpanHover from "../UI/spanHover/MySpanHover";
 import cl from "./MenuButton.module.css";
 import {useHistory} from "react-router";
 
@@ -7,7 +6,13 @@ export default function MenuButton ({item}) {
 
     return (
         <div className={cl.menuButtonDiv} onClick={() => history.push(item.path)}>
-            <MySpanHover>{item.name}</MySpanHover>
+            <div className={cl.buttonBorder}>
+                <div className={cl.buttonImg}>
+                </div>
+                <span>{item.name}</span>
+                <div className={cl.buttonImg}>
+                </div>
+            </div>
         </div>
     );
 }

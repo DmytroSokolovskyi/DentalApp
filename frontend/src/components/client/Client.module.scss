@@ -1,0 +1,28 @@
+.clientDiv{
+ display: flex;
+  height: 4%;
+  align-items: center;
+  padding-left: 5%;
+  margin: 5px;
+  width: 100%;
+  background-color: #f2f5f6;
+  box-shadow: 1px 1px 0 1px #5a5c5e, 5px 2px 0 1px #9fa0a1;
+  transition: all 0.8s ease 0s;
+  perspective: 400px;
+}
+
+.clientDiv:hover{
+
+}
+
+.clientDiv span{
+  display: block;
+  width: 20%;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.clientDiv span:hover{
+  transform: scale3d(1.1, 1.5, 1);
+}
+
