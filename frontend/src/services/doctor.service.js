@@ -37,6 +37,15 @@ export const saveEditClient = (id, client) => async (dispatch) => {
     return res;
 };
 
+export const deleteClient = (id) => async (dispatch) => {
+    const res = await axiosInstance.delete(doctorUrl + clientUrl + "/" + id);
+
+    console.log(res);
+    // dispatch(updateClient(res.data));
+
+    return res;
+};
+
 //
 // export const getRefresh = (refreshToken) => {
 //     const res = axiosInstance

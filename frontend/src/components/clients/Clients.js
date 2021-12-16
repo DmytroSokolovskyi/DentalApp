@@ -1,4 +1,4 @@
-import {getClients, saveEditClient, setClient} from "../../services/doctor.service";
+import {deleteClient, getClients, saveEditClient, setClient} from "../../services/doctor.service";
 import {useEffect, useState} from "react";
 import Client from "../client/Client";
 import ClientForm from "../clientForm/ClientForm";
@@ -17,6 +17,8 @@ export default function Clients () {
         setClientAll(clients);
     }, [clients]);
 
+    // todo зробити пошук i фiльтрацiю
+
     const clickCreate = (client) => {
         setFetch(setClient(client), true);
     };
@@ -28,6 +30,10 @@ export default function Clients () {
     const clickUpdate = (id, client) => {
         console.log(client);
         setFetch(saveEditClient(id, client), true);
+    };
+
+    const clickDelete = (id) => {
+        setFetch(deleteClient(id), true);
     };
 
     if (loading) {
@@ -44,9 +50,10 @@ export default function Clients () {
                             <span>Фамiлiя</span>
                             <span>Телефон</span>
                             <span>Email</span>
+                            <span> </span>
                         </div>
                         {
-                            clientsAll.map(item => <Client clickEdit={clickEdit} client={item} key={item.id}/>)
+                            clientsAll.map(item => <Client clickEdit={clickEdit} clickDelete={clickDelete} client={item} key={item.id}/>)
                         }
                     </div>
                     <div className={cl.clientsForm}>

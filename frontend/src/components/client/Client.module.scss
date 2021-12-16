@@ -1,28 +1,59 @@
-.clientDiv{
- display: flex;
-  height: 4%;
+.clientDiv {
+  display: flex;
+  height: 5%;
   align-items: center;
-  padding-left: 5%;
-  margin: 5px;
+  justify-content: center;
+  margin: 4px;
   width: 100%;
   background-color: #f2f5f6;
   box-shadow: 1px 1px 0 1px #5a5c5e, 5px 2px 0 1px #9fa0a1;
   transition: all 0.8s ease 0s;
-  perspective: 400px;
 }
 
-.clientDiv:hover{
-
+.infoClient {
+  display: flex;
+  width: 85%;
+  padding-left: 10px;
 }
 
-.clientDiv span{
+.infoClient span {
   display: block;
-  width: 20%;
+  width: 24%;
+  height: 100%;
   font-size: 14px;
   letter-spacing: 1px;
+  overflow-x: hidden;
 }
 
-.clientDiv span:hover{
-  transform: scale3d(1.1, 1.5, 1);
+.clientDiv span:hover {
+  font-size: 16px;
+  letter-spacing: 2px;
 }
+
+.buttonsDiv {
+  width: 15%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  .deleteBtn{
+    background: url('../../assets/img/delete.png') 1px 3px/70% 70% no-repeat;
+  }
+  .createVisit{
+    background: url('../../assets/img/dentist-chair.png') 1px 3px/70% 70% no-repeat;
+  }
+  .addTeeth{
+    background: url('../../assets/img/Nestor cut.png') 1px 3px/70% 70% no-repeat;
+  }
+}
+
+.buttonsDiv button{
+  height: 90%;
+  width: 25%;
+  transition: all 0.5s ease 0s;
+}
+.buttonsDiv button:hover{
+  transform: scale(1.2, 1.2);
+}
+
 
