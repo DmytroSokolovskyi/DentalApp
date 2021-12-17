@@ -63,6 +63,7 @@ export const useAuth = () => {
             const accessToken = getToken("access_token");
 
             const res = await logOut(accessToken);
+            destroyAuthToLocal();
 
             if (res === 204) {
                 setIsAuth(false);
