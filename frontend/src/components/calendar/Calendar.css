@@ -1,0 +1,13 @@
+.fc-toolbar-title{
+    /*!*display: block;*!*/
+    font-size: 18px !important;
+    /*!*!*height: 100%;*!*!*/
+    /*!*!*width: 100px;*!*!*/
+    /*!*!*background-color: black;*!*!*/
+}
+.fc-daygrid-day-number {
+    font-size: 14px;
+}
+.fc .fc-highlight {
+    background: #a3ddea !important;
+}

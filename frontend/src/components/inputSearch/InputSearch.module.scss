@@ -1,0 +1,36 @@
+.searchChatDiv {
+  display: flex;
+  flex-direction: column;
+  height: 30%;
+  width: 30%;
+}
+
+.searchResultDiv {
+  position: relative;
+  width: 100%;
+  display: block;
+  z-index: 1;
+}
+
+.clientInfo {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 5%;
+  min-height: 30px;
+  background-color: #ededed;
+  cursor: pointer;
+}
+
+.clientInfo:hover {
+  background-color: #91d5e7;
+}
+
+.searchResultDivHidden {
+  color: red;
+  display: none;
+}
+
+.clientInfo span {
+  margin: 2px;
+}

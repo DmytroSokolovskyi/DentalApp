@@ -3,10 +3,10 @@ import MenuHeader from "../menuHeader/MenuHeader";
 import MenuHeaderDoctor from "../menuHeaderDoctor/MenuHeaderDoctor";
 import MyButton from "../UI/myButton/MyButton";
 import cl from "./Header.module.scss";
+import logo from "../../assets/img/Nestordental.png";
 import {useAuth} from "../../hooks/useAuth";
 import {useContext} from "react";
 import {useHistory} from "react-router";
-import logo from "../../assets/img/Nestordental.png";
 
 export default function Header () {
     const history = useHistory();
@@ -24,7 +24,7 @@ export default function Header () {
     return (
         <div className={cl.headerDiv}>
             <img className={cl.logoImg} src={logo} alt="logo"/>
-            <div className={cl._container}>
+            <div className={cl.container}>
                 <div className={cl.rowHeader}>
                     <div>067-86-26-939</div>
                     <div>067-86-26-939</div>

@@ -1,5 +1,5 @@
-import {deleteClient, getClients, saveEditClient, setClient} from "../../services/doctor.service";
-import {useEffect, useState} from "react";
+import {deleteClient, getClientsAll, saveEditClient, setClient} from "../../services/doctor.service";
+import {useCallback, useEffect, useState} from "react";
 import Client from "../client/Client";
 import ClientForm from "../clientForm/ClientForm";
 import MyLoader from "../UI/myLoader/MyLoader";
@@ -10,31 +10,36 @@ import {useSelector} from "react-redux";
 export default function Clients () {
     const [clientsAll, setClientAll] = useState([]);
     const [chosenClient, setChosenClient] = useState({});
-    const {loading, setFetch, error} = useFetch(getClients, true);
-    const {clients} = useSelector(state => state.mainReducer);
+    const {loading, setFetch, error, goFetch} = useFetch();
+    const clients = useSelector(state => state.mainReducer.clients);
+
+    console.log("Clients", clients);
 
     useEffect(() => {
-        setClientAll(clients);
+        clients.length ? setClientAll(clients) : goFetch(getClientsAll, true);
     }, [clients]);
 
     // todo зробити пошук i фiльтрацiю
 
-    const clickCreate = (client) => {
+    const clickCreate = useCallback((client) => {
         setFetch(setClient(client), true);
-    };
+    }, [],
+    );
 
-    const clickEdit = (client) => {
+    const clickEdit = useCallback((client) => {
         setChosenClient(client);
-    };
+    }, [],
+    );
 
-    const clickUpdate = (id, client) => {
-        console.log(client);
+    const clickUpdate = useCallback((id, client) => {
         setFetch(saveEditClient(id, client), true);
-    };
+    }, [],
+    );
 
-    const clickDelete = (id) => {
+    const clickDelete = useCallback((id) => {
         setFetch(deleteClient(id), true);
-    };
+    }, [],
+    );
 
     if (loading) {
         return <MyLoader/>;
@@ -46,8 +51,8 @@ export default function Clients () {
                 <div className={cl.clientsContent}>
                     <div className={cl.clientsList}>
                         <div className={cl.clientsNav}>
-                            <span>Iмя</span>
                             <span>Фамiлiя</span>
+                            <span>Iмя</span>
                             <span>Телефон</span>
                             <span>Email</span>
                             <span> </span>

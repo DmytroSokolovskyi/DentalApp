@@ -1,11 +1,24 @@
 const {Visits, Clients} = require('../dataBase');
 const Client = require('../dataBase/Clients');
 const {statusEnum} = require("../configs");
+const {clientService} = require("../service");
 
 module.exports = {
     getVisits: async (req, res, next) => {
         try {
             const visits = await Visits.find();
+
+            res.json(visits);
+        } catch (e) {
+            next(e);
+        }
+    },
+
+    createVisit: async (req, res, next) => {
+        try {
+            console.log("CREEEATE VISIT");
+            const visits = await Visits.find();
+
             res.json(visits);
         } catch (e) {
             next(e);
@@ -14,9 +27,9 @@ module.exports = {
 
     getClients: async (req, res, next) => {
         try {
-            const visits = await Clients.find();
+            const clients = await clientService.getAllclients(req.query);
 
-            res.json(visits);
+            res.json(clients);
         } catch (e) {
             next(e);
         }
@@ -47,16 +60,6 @@ module.exports = {
             const client = await Clients.findByIdAndUpdate(_id,{...req.body}, {new: true} );
 
             res.json(client);
-        } catch (e) {
-            next(e);
-        }
-    },
-
-    createVisit: async (req, res, next) => {
-        try {
-            const visits = await Visits.find();
-
-            res.json(visits);
         } catch (e) {
             next(e);
         }

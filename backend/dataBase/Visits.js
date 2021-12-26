@@ -2,7 +2,13 @@ const {Schema, model} = require('mongoose');
 const {tableNamesEnum} = require('../configs');
 
 const visitsSchema = new Schema({
-    date: {
+    start: {
+        type: String,
+        unique: true,
+        required: true,
+        trim: true
+    },
+    end: {
         type: String,
         unique: true,
         required: true,

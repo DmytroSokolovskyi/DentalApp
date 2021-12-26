@@ -5,8 +5,13 @@
   @extend %flex_center;
 }
 
-._container {
-  @extend %flex_center;
+.container {
+  width: 100%;
+  max-width: 1130px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
 }
 
