@@ -88,5 +88,21 @@ module.exports ={
         } catch (e) {
             next(e);
         }
-    }
+    },
+
+    validateQuery: (validator) => async (req, res, next) => {
+        try {
+            const {error, value} = await validator.validate(req.query);
+
+            if (error) {
+                return next({message: error.details[0].message, code: statusEnum.BAD_REQUEST});
+            }
+
+            req.query = value;
+
+            next();
+        } catch (e) {
+            next(e);
+        }
+    },
 };

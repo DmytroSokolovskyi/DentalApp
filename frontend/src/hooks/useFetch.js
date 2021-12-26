@@ -1,14 +1,14 @@
-import {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
+import {useState} from "react";
 
-export const useFetch = (callback, toRedux) => {
+export const useFetch = () => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
     const [res, setRes] = useState({});
     const dispatch = useDispatch();
 
-    const goFetch = async () => {
+    const goFetch = async (callback, toRedux) => {
         try {
             setLoading(true);
 
@@ -40,10 +40,6 @@ export const useFetch = (callback, toRedux) => {
             setLoading(false);
         }
     };
-
-    useEffect(() => {
-        goFetch();
-    }, [callback]);
 
     return {
         error,

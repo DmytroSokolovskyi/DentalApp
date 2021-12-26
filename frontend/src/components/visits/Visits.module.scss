@@ -1,0 +1,62 @@
+.visitsContainer {
+    max-width: 1130px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.calendardiv {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 33%;
+}
+
+.visitsContent {
+    display: flex;
+    height: 100%;
+    width: 67%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.datePickerDiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 60%;
+}
+
+.visitsList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #56d248;
+    height: 80%;
+    width: 100%;
+}
+
+.createVisit {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 20%;
+    width: 100%;
+    padding-top: 10px;
+}
+
+.createVisit input {
+    text-align: center;
+    min-height: 30px;
+    border: 1px solid #a1e3d2;
+    box-shadow: 1px 1px 1px 1px #5a5c5e, 5px 2px 3px 1px #9fa0a1;
+    transition: all 0.8s ease 0s;
+    border-radius: 6px;
+}
+
+
+

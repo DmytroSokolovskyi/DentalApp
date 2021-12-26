@@ -1,10 +1,10 @@
-import {getToken, saveTokens} from "./storage.service";
+import {destroyAuthToLocal, destroyTokens, getToken, saveTokens} from "./storage.service";
 import axios from "axios";
 
-export const apiUrl = "http://localhost:5001";
+export const apiUrl = "http://localhost:5000";
 export const doctorUrl = "/doctor";
 export const clientUrl = "/client";
-export const userUrl = "/users";
+export const visitUrl = "/visit";
 export const authUrl = "/auth";
 
 export const config = {
@@ -24,9 +24,10 @@ axiosInstance.interceptors.response.use(
         const config = error.config;
 
         if (config.url !== "/auth/login" && error.response) {
+            console.log("Между");
             if (error.response.status === 401 && !_retry) {
                 _retry = true;
-
+                console.log("app");
                 try {
                     const res = await axiosInstance.get("/auth/refresh", {
                         headers: {
@@ -34,8 +35,14 @@ axiosInstance.interceptors.response.use(
                         },
                     });
 
+                    if (res.status === 401) {
+                        destroyTokens();
+                        destroyAuthToLocal();
+                    }
+
                     const {access_token, refresh_token} = res.data;
                     saveTokens(access_token, refresh_token);
+                    _retry = false;
 
                     return axiosInstance(config);
                 } catch (_error) {

@@ -1,17 +1,19 @@
+import {memo, useEffect} from "react";
 import MyButton from "../UI/myButton/MyButton";
 import MyInput from "../UI/myInput/MyInput";
 import cl from "./ClientForm.module.scss";
-import {useEffect} from "react";
 import {useFormValid} from "../../hooks/useFormValid";
 import {useInput} from "../../hooks";
 
-export default function ClientForm ({clickCreate, clickUpdate, chosenClient}) {
+export default memo(function ClientForm ({clickCreate, clickUpdate, chosenClient}) {
     const name = useInput("", {isEmpty: true, minLength: 3, maxLength: 30});
     const surname = useInput("", {isEmpty: true, minLength: 5, maxLength: 30});
     const phone = useInput("", {isEmpty: true, isPhone: true});
     const email = useInput("", {isEmpty: true, isEmail: true});
 
     const validForm = useFormValid(name, surname, phone, email);
+
+    // todo дороби скривання поля тел та емаил при редагуванн
 
     useEffect(() => {
         name.setValue(chosenClient.name);
@@ -48,20 +50,20 @@ export default function ClientForm ({clickCreate, clickUpdate, chosenClient}) {
                 <div className={cl.bodyClientForm}>
                     <form >
                         <MyInput
-                            type="name"
-                            value={name.value}
-                            placeholder="Iм'я"
-                            onChange={(e) => name.onChange(e)}
-                            onBlur={(e) => name.onBlur(e)}
-                            error={name.isDirty ? name.errorMessage : ""}
-                        />
-                        <MyInput
                             type="surname"
                             value={surname.value}
                             placeholder="Фамiлiя"
                             onChange={(e) => surname.onChange(e)}
                             onBlur={(e) => surname.onBlur(e)}
                             error={surname.isDirty ? surname.errorMessage : ""}
+                        />
+                        <MyInput
+                            type="name"
+                            value={name.value}
+                            placeholder="Iм'я"
+                            onChange={(e) => name.onChange(e)}
+                            onBlur={(e) => name.onBlur(e)}
+                            error={name.isDirty ? name.errorMessage : ""}
                         />
                         <MyInput
                             type="phone"
@@ -97,4 +99,5 @@ export default function ClientForm ({clickCreate, clickUpdate, chosenClient}) {
             </div>
         </div>
     );
-}
+},
+);

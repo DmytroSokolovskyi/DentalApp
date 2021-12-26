@@ -25,6 +25,7 @@ export const mainReducer = (state = initialState, action) => {
     }
 
     case SET_CLIENTS: {
+        console.log("SET_CLIENTS");
         return {...state, clients: [...action.payload]};
     }
     case SET_CLIENT: {
