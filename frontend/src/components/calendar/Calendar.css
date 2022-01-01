@@ -1,13 +1,27 @@
 .fc-toolbar-title{
     /*!*display: block;*!*/
     font-size: 18px !important;
-    /*!*!*height: 100%;*!*!*/
-    /*!*!*width: 100px;*!*!*/
-    /*!*!*background-color: black;*!*!*/
+    height: 100%;
+    max-width: 220px;
+    width: 200px;
+    text-align: center;
+    /*background-color: black;*/
 }
 .fc-daygrid-day-number {
     font-size: 14px;
 }
 .fc .fc-highlight {
     background: #a3ddea !important;
+}
+
+.fc .fc-button-primary {
+    color: #2b2b2b !important;
+    background-color: #2e8eef !important;
+    height: 2%;
+    overflow: hidden;
+    border-radius: 50%;
+    font-size: 12px !important;
+}
+.fc-daygrid-day-events {
+    font-size: 70%;
 }

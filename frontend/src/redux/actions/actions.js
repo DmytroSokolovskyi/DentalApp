@@ -1,8 +1,10 @@
 import {
-    DELETE_USER, SET_CLIENT,
-    // SET_CHOSE_USER,
+    DELETE_CLIENT,
+    DELETE_USER,
+    SET_CLIENT,
     SET_CLIENTS,
     SET_USER,
+    SET_VISITS,
     UPDATE_CLIENT,
 } from "./actionsType";
 
@@ -17,15 +19,19 @@ export const setClients = (value) => {
 export const setClient = (value) => {
     return {type: SET_CLIENT, payload: value};
 };
-//
-// export const setChoseUser = (value) => {
-//     return {type: SET_CHOSE_USER, payload: value};
-// };
-//
+
 export const deleteUser = () => {
     return {type: DELETE_USER};
 };
 
 export const updateClient = (value) => {
     return {type: UPDATE_CLIENT, payload: value};
+};
+
+export const deleteClient = (value) => {
+    return {type: DELETE_CLIENT, payload: value};
+};
+
+export const setVisits = (value) => {
+    return {type: SET_VISITS, payload: value};
 };

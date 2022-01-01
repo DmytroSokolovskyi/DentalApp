@@ -12,7 +12,9 @@ export const useFetch = () => {
         try {
             setLoading(true);
 
-            const response = toRedux ? await dispatch(callback()) : await callback;
+            const response = toRedux ? await dispatch(callback) : await callback;
+
+            console.log(response);
 
             setRes(response);
             setData(response.data);

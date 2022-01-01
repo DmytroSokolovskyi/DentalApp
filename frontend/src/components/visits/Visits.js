@@ -1,4 +1,5 @@
 import "react-datepicker/dist/react-datepicker.css";
+import {getVisits, saveVisit} from "../../services/doctor.service";
 import {useCallback, useEffect, useState} from "react";
 import Calendar from "../calendar/Calendar";
 import DatePicker from "react-datepicker";
@@ -7,20 +8,17 @@ import MyButton from "../UI/myButton/MyButton";
 import cl from "./Visits.module.scss";
 import uk from "date-fns/locale/uk";
 import {useFetch} from "../../hooks";
-import {getClientsAll, getVisits, saveVisit} from "../../services/doctor.service";
 
 export default function Visits ({client}) {
     const [chosenDay, setChosenDay] = useState("");
     const [visitsAll, setVisitsAll] = useState([]);
-    const [startEvent, setStartEvent] = useState("");
-    const [endEvent, setEndEvent] = useState("");
-    const [chosenClient, setChosenClient] = useState({});
-    const {goFetch, res} = useFetch();
+    const [visit, setVisit] = useState({start: "", end: "", client: {}});
+    const {goFetch, data} = useFetch();
 
-    console.log(res);
+    console.log("visit", visit);
 
     useEffect(() => {
-        goFetch(getVisits(), false);
+        goFetch(getVisits(), true);
     }, []);
 
     const clickToDay = useCallback((day) => {
@@ -29,19 +27,23 @@ export default function Visits ({client}) {
     );
 
     const selectClient = useCallback((client) => {
-        setChosenClient(client);
-    }, [],
+        setVisit({...visit, client});
+    }, [visit],
     );
 
     const selectStartEnd = useCallback((select) => {
-        setStartEvent(select.start);
-        setEndEvent(select.end);
-    }, [],
+        setVisit({...visit, start: select.start, end: select.end});
+    }, [visit],
+    );
+
+    const selectVisit = useCallback((value) => {
+        console.log(value);
+        setVisit({client: value.client, start: value.start, end: value.end});
+    }, [visit],
     );
 
     const createNewVisit = () => {
-        const newVisit = {start: startEvent, end: endEvent, client: chosenClient.id};
-        goFetch(saveVisit(newVisit), true);
+        goFetch(saveVisit(visit), true);
     };
 
     return (
@@ -50,24 +52,28 @@ export default function Visits ({client}) {
                 <div className={cl.createVisit}>
                     <div className={cl.datePickerDiv}>
                         <DatePicker
-                            selected={startEvent}
-                            onChange={(date) => setStartEvent(date)}
+                            selected={visit.start}
+                            onChange={(date) => setVisit({...visit, start: date})}
                             showTimeSelect={true}
                             dateFormat="Pp"
                             locale ={uk}
                             placeholderText="Start"
                         />
                         <DatePicker
-                            selected={endEvent}
-                            onChange={(date) => setEndEvent(date)}
+                            selected={visit.end}
+                            onChange={(date) => setVisit({...visit, end: date})}
                             showTimeSelect={true}
                             dateFormat="Pp"
                             locale ={uk}
                             placeholderText="End"
                         />
                     </div>
-                    <InputSearch client={client} selectClient={selectClient}/>
-                    <MyButton onClick={() => createNewVisit()}> Зберегти </MyButton>
+                    <InputSearch client={client || visit.client} selectClient={selectClient}/>
+                    <MyButton
+                        onClick={() => createNewVisit()}
+                    >
+                        Зберегти
+                    </MyButton>
                 </div>
                 <div className={cl.visitsList}>
 
@@ -77,6 +83,7 @@ export default function Visits ({client}) {
                 <Calendar
                     clickToDay={clickToDay}
                     selectStartEnd={selectStartEnd}
+                    selectVisit={selectVisit}
                 />
             </div>
         </div>

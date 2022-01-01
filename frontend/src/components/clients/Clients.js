@@ -1,4 +1,11 @@
-import {deleteClient, getClientsAll, saveEditClient, setClient} from "../../services/doctor.service";
+import {
+    deleteClient,
+    deleteClientById,
+    getClientsAll,
+    saveClient,
+    saveEditClient,
+    setClient,
+} from "../../services/doctor.service";
 import {useCallback, useEffect, useState} from "react";
 import Client from "../client/Client";
 import ClientForm from "../clientForm/ClientForm";
@@ -13,16 +20,14 @@ export default function Clients () {
     const {loading, setFetch, error, goFetch} = useFetch();
     const clients = useSelector(state => state.mainReducer.clients);
 
-    console.log("Clients", clients);
-
     useEffect(() => {
-        clients.length ? setClientAll(clients) : goFetch(getClientsAll, true);
+        clients.length ? setClientAll(clients) : goFetch(getClientsAll(), true);
     }, [clients]);
 
     // todo зробити пошук i фiльтрацiю
 
     const clickCreate = useCallback((client) => {
-        setFetch(setClient(client), true);
+        setFetch(saveClient(client), true);
     }, [],
     );
 
@@ -37,7 +42,7 @@ export default function Clients () {
     );
 
     const clickDelete = useCallback((id) => {
-        setFetch(deleteClient(id), true);
+        setFetch(deleteClientById(id), true);
     }, [],
     );
 

@@ -5,6 +5,7 @@ import {useDebounce} from "../../hooks/useDebounce";
 import {useSelector} from "react-redux";
 
 export default memo(function InputSearch ({client, selectClient}) {
+    console.log(client);
     const [inputSearch, setInputSearch] = useState("");
     const [clientsArray, setClientsArray] = useState([]);
     const {clients} = useSelector(state => state.mainReducer);
@@ -15,7 +16,7 @@ export default memo(function InputSearch ({client, selectClient}) {
     };
 
     useEffect(() => {
-        if (client) {
+        if (client.name) {
             choseClient(client);
         } else if (clients.length) { setClientsArray(clients); }
     }, [clients]);

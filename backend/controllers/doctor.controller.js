@@ -16,8 +16,9 @@ module.exports = {
 
     createVisit: async (req, res, next) => {
         try {
-            console.log("CREEEATE VISIT");
-            const visits = await Visits.find();
+            const newVisit = {...req.body, client: req.client._id , doctor: req.user._id};
+
+            const visits = await Visits.create(newVisit);
 
             res.json(visits);
         } catch (e) {
@@ -80,9 +81,6 @@ module.exports = {
 
 // doctorRouter.get('/', () => 'all visits visit');
 // doctorRouter.get('/client', () => 'all clients');
-// doctorRouter.post('/client', () => 'create client');
-// doctorRouter.post('/visit', () => 'create visit');
 // doctorRouter.delete('/client', () => 'del client');
 // doctorRouter.delete('/visit', () => 'del visit');
-// doctorRouter.put('/client/:client_id', () => 'edit client');
 // doctorRouter.put('/visit/:visit_id', () => 'edit visit');

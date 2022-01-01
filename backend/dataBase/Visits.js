@@ -3,13 +3,13 @@ const {tableNamesEnum} = require('../configs');
 
 const visitsSchema = new Schema({
     start: {
-        type: String,
+        type: Date,
         unique: true,
         required: true,
         trim: true
     },
     end: {
-        type: String,
+        type: Date,
         unique: true,
         required: true,
         trim: true
@@ -27,6 +27,13 @@ const visitsSchema = new Schema({
         type: Boolean,
         default: false
     }
-}, { timestamps: true, toObject: { virtuals: true}, toJSON: { virtuals: true } });
+}, { timestamps: true, toObject: { virtuals: true}, toJSON: { virtuals: true }});
 
+visitsSchema.pre('find', function() {
+    this.populate('client');
+    visitsSchema.virtual('title').get(function() {
+        const title = `${this.client.surname} ${this.client.name}`;
+        return title;
+    });
+});
 module.exports = model(tableNamesEnum.VISITS, visitsSchema);

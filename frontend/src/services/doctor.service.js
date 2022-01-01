@@ -1,5 +1,5 @@
 import {axiosInstance, clientUrl, doctorUrl, visitUrl} from "./config";
-import {setClients, updateClient} from "../redux/actions";
+import {deleteClient, setClient, setClients, setVisits, updateClient} from "../redux/actions";
 
 export const getClientsAll = (value) => async (dispatch) => {
     const res = await axiosInstance.get(doctorUrl + clientUrl);
@@ -19,7 +19,7 @@ export const getClients = async (value) => {
     return res;
 };
 
-export const setClient = (client) => async (dispatch) => {
+export const saveClient = (client) => async (dispatch) => {
     const res = await axiosInstance.post(doctorUrl + clientUrl, client);
     dispatch(setClient(res.data));
 
@@ -28,37 +28,36 @@ export const setClient = (client) => async (dispatch) => {
 
 export const saveEditClient = (id, client) => async (dispatch) => {
     const res = await axiosInstance.put(doctorUrl + clientUrl + "/" + id, client);
-
     dispatch(updateClient(res.data));
 
     return res;
 };
 
-export const deleteClient = (id) => async (dispatch) => {
+export const deleteClientById = (id) => async (dispatch) => {
     const res = await axiosInstance.delete(doctorUrl + clientUrl + "/" + id);
 
-    // todo dorobu
-    console.log(res);
-    // dispatch(updateClient(res.data));
+    dispatch(deleteClient(id));
 
     return res;
 };
 
-export const getVisits = async () => {
-    try {
-        const visits = (await axiosInstance.get(doctorUrl)).data;
+export const getVisits = () => async (dispatch) => {
+    const res = await axiosInstance.get(doctorUrl);
 
-        return visits;
-    } catch (e) {
-        console.log(e);
-    }
+    dispatch(setVisits(res.data));
+    return res;
 };
 
 export const saveVisit = (visit) => async (dispatch) => {
-    const res = await axiosInstance.post(doctorUrl + visitUrl);
-    // dispatch(setClient(res.data));
-
-    return res;
+    try {
+        console.log(visit);
+        const res = await axiosInstance.post(doctorUrl + "/visit", visit);
+        // dispatch(setClient(res.data));
+        console.log("RESSSSSSSSSSSS", res);
+        return res;
+    } catch (e) {
+        console.log(e);
+    }
 };
 
 //
