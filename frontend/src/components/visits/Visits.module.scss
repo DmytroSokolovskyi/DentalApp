@@ -6,56 +6,61 @@
     align-items: center;
 }
 
-.calendardiv {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    width: 33%;
-}
-
 .visitsContent {
     display: flex;
     height: 100%;
-    width: 67%;
+    width: 30%;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
 
-.datePickerDiv {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
-    height: 60%;
-}
-
-.visitsList {
+.calendardiv {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: #56d248;
-    height: 80%;
-    width: 100%;
+    height: 100%;
+    width: 70%;
+    margin:0 5px 0 5px;
 }
 
 .createVisit {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    height: 20%;
+    justify-content: center;
+    flex-direction: column;
+    height: 40%;
     width: 100%;
-    padding-top: 10px;
+    padding: 10px;
+}
+
+.visitsList{
+    display: flex;
+    align-items: center;
+    height: 60%;
+    width: 100%;
+    background-color: #0a53a8;
+}
+
+.datePickerDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
 }
 
 .createVisit input {
     text-align: center;
-    min-height: 30px;
+    min-height: 35px;
     border: 1px solid #a1e3d2;
     box-shadow: 1px 1px 1px 1px #5a5c5e, 5px 2px 3px 1px #9fa0a1;
     transition: all 0.8s ease 0s;
     border-radius: 6px;
+    width: 100%;
+    margin:10px 0;
 }
 
 
