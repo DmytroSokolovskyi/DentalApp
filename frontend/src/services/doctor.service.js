@@ -1,7 +1,7 @@
 import {axiosInstance, clientUrl, doctorUrl, visitUrl} from "./config";
-import {deleteClient, setClient, setClients, setVisits, updateClient} from "../redux/actions";
+import {deleteClient, setClient, setClients, setVisit, setVisits, updateClient} from "../redux/actions";
 
-export const getClientsAll = (value) => async (dispatch) => {
+export const getClientsAll = () => async (dispatch) => {
     const res = await axiosInstance.get(doctorUrl + clientUrl);
     dispatch(setClients(res.data));
 
@@ -50,26 +50,11 @@ export const getVisits = () => async (dispatch) => {
 
 export const saveVisit = (visit) => async (dispatch) => {
     try {
-        console.log(visit);
         const res = await axiosInstance.post(doctorUrl + "/visit", visit);
-        // dispatch(setClient(res.data));
-        console.log("RESSSSSSSSSSSS", res);
+        dispatch(setVisit(res.data));
+
         return res;
     } catch (e) {
         console.log(e);
     }
 };
-
-//
-// export const getRefresh = (refreshToken) => {
-//     const res = axiosInstance
-//         .get(authUrl + "/refresh", {
-//             headers: {
-//                 Authorization: `${refreshToken}`,
-//             },
-//         })
-//         .then(value => value.status)
-//         .catch(e => console.log(e));
-//
-//     return res;
-// };

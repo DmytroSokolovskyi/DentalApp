@@ -8,18 +8,22 @@ import MyButton from "../UI/myButton/MyButton";
 import cl from "./Visits.module.scss";
 import uk from "date-fns/locale/uk";
 import {useFetch} from "../../hooks";
+import {useDispatch} from "react-redux";
+import {setDay} from "../../redux/actions";
 
 export default function Visits ({client}) {
-    const [chosenDay, setChosenDay] = useState("");
+    const [chosenDay, setChosenDay] = useState(new Date());
     const [visitsAll, setVisitsAll] = useState([]);
     const [visit, setVisit] = useState({start: "", end: "", client: {}});
     const {goFetch, data} = useFetch();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         goFetch(getVisits(), true);
     }, []);
 
     const clickToDay = useCallback((day) => {
+        dispatch(setDay(day));
         setChosenDay(day);
     }, [],
     );

@@ -1,7 +1,16 @@
-import {DELETE_CLIENT, DELETE_USER, SET_CLIENT, SET_CLIENTS, SET_USER, SET_VISITS, UPDATE_CLIENT} from "../actions";
+import {
+    DELETE_CLIENT,
+    DELETE_USER,
+    SET_CLIENT,
+    SET_CLIENTS,
+    SET_DAY,
+    SET_USER, SET_VISIT,
+    SET_VISITS,
+    UPDATE_CLIENT,
+} from "../actions";
 
 const initialState = {
-    // choseUser: {},
+    day: new Date(),
     clients: [],
     loginUser: {},
     visits: [],
@@ -37,8 +46,16 @@ export const mainReducer = (state = initialState, action) => {
         return {...state, clients: [...newClients]};
     }
 
+    case SET_VISIT: {
+        return {...state, visits: [...state.visits, action.payload]};
+    }
+
     case SET_VISITS: {
         return {...state, visits: [...action.payload]};
+    }
+
+    case SET_DAY: {
+        return {...state, day: action.payload};
     }
 
     default:

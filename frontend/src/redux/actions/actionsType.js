@@ -3,5 +3,7 @@ export const DELETE_USER = "DELETE_USER";
 export const SET_CLIENT = "SET_CLIENT";
 export const SET_CLIENTS = "SET_CLIENTS";
 export const SET_USER = "SET_USER";
+export const SET_VISIT = "SET_VISIT";
 export const SET_VISITS = "SET_VISITS";
 export const UPDATE_CLIENT = "UPDATE_CLIENT";
+export const SET_DAY = "SET_DAY";

@@ -1,10 +1,8 @@
 import {
-    deleteClient,
     deleteClientById,
     getClientsAll,
     saveClient,
     saveEditClient,
-    setClient,
 } from "../../services/doctor.service";
 import {useCallback, useEffect, useState} from "react";
 import Client from "../client/Client";
@@ -15,14 +13,15 @@ import {useFetch} from "../../hooks";
 import {useSelector} from "react-redux";
 
 export default function Clients () {
-    const [clientsAll, setClientAll] = useState([]);
     const [chosenClient, setChosenClient] = useState({});
-    const {loading, setFetch, error, goFetch} = useFetch();
+    const {loading, setFetch, goFetch} = useFetch();
     const clients = useSelector(state => state.mainReducer.clients);
 
     useEffect(() => {
-        clients.length ? setClientAll(clients) : goFetch(getClientsAll(), true);
-    }, [clients]);
+        if (!clients.length) {
+            goFetch(getClientsAll(), true);
+        }
+    }, []);
 
     // todo зробити пошук i фiльтрацiю
 
@@ -63,7 +62,7 @@ export default function Clients () {
                             <span> </span>
                         </div>
                         {
-                            clientsAll.map(item => <Client clickEdit={clickEdit} clickDelete={clickDelete} client={item} key={item.id}/>)
+                            clients.map(item => <Client clickEdit={clickEdit} clickDelete={clickDelete} client={item} key={item.id}/>)
                         }
                     </div>
                     <div className={cl.clientsForm}>
