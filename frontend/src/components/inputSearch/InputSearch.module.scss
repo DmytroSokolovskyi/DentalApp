@@ -1,15 +1,19 @@
-.searchChatDiv {
+.searchInputDiv {
   display: flex;
   flex-direction: column;
-  height: 30%;
-  width: 30%;
+  width: 100%;
+  //z-index: 1;
+  position: relative;
 }
 
 .searchResultDiv {
-  position: relative;
+  position: absolute;
   width: 100%;
   display: block;
   z-index: 1;
+  background-color: #ededed;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .clientInfo {
@@ -18,7 +22,7 @@
   align-items: center;
   padding-left: 5%;
   min-height: 30px;
-  background-color: #ededed;
+  //background-color: #ededed;
   cursor: pointer;
 }
 

@@ -7,9 +7,9 @@ export default function MenuButton ({item}) {
     return (
         <div className={cl.menuButtonDiv} onClick={() => history.push(item.path)}>
             <div className={cl.buttonBorder}>
-                <span>{item.name}</span>
                 <div className={cl.buttonImg}>
                 </div>
+                <span>{item.name}</span>
             </div>
         </div>
     );

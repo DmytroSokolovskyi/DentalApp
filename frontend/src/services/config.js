@@ -24,21 +24,19 @@ axiosInstance.interceptors.response.use(
         const config = error.config;
 
         if (config.url !== "/auth/login" && error.response) {
-            console.log("Между");
+            if (error.response.status === 401 && config.url === "/auth/refresh") {
+                destroyAuthToLocal();
+                destroyTokens();
+            }
+
             if (error.response.status === 401 && !_retry) {
                 _retry = true;
-                console.log("app");
                 try {
                     const res = await axiosInstance.get("/auth/refresh", {
                         headers: {
                             refresh_token: getToken("refresh_token"),
                         },
                     });
-
-                    if (res.status === 401) {
-                        destroyTokens();
-                        destroyAuthToLocal();
-                    }
 
                     const {access_token, refresh_token} = res.data;
                     saveTokens(access_token, refresh_token);

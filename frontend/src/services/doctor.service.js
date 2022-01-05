@@ -1,7 +1,7 @@
 import {axiosInstance, clientUrl, doctorUrl, visitUrl} from "./config";
-import {setClients, updateClient} from "../redux/actions";
+import {deleteClient, setClient, setClients, setVisit, setVisits, updateClient} from "../redux/actions";
 
-export const getClientsAll = (value) => async (dispatch) => {
+export const getClientsAll = () => async (dispatch) => {
     const res = await axiosInstance.get(doctorUrl + clientUrl);
     dispatch(setClients(res.data));
 
@@ -19,7 +19,7 @@ export const getClients = async (value) => {
     return res;
 };
 
-export const setClient = (client) => async (dispatch) => {
+export const saveClient = (client) => async (dispatch) => {
     const res = await axiosInstance.post(doctorUrl + clientUrl, client);
     dispatch(setClient(res.data));
 
@@ -28,49 +28,33 @@ export const setClient = (client) => async (dispatch) => {
 
 export const saveEditClient = (id, client) => async (dispatch) => {
     const res = await axiosInstance.put(doctorUrl + clientUrl + "/" + id, client);
-
     dispatch(updateClient(res.data));
 
     return res;
 };
 
-export const deleteClient = (id) => async (dispatch) => {
+export const deleteClientById = (id) => async (dispatch) => {
     const res = await axiosInstance.delete(doctorUrl + clientUrl + "/" + id);
 
-    // todo dorobu
-    console.log(res);
-    // dispatch(updateClient(res.data));
+    dispatch(deleteClient(id));
 
     return res;
 };
 
-export const getVisits = async () => {
-    try {
-        const visits = (await axiosInstance.get(doctorUrl)).data;
+export const getVisits = () => async (dispatch) => {
+    const res = await axiosInstance.get(doctorUrl);
 
-        return visits;
+    dispatch(setVisits(res.data));
+    return res;
+};
+
+export const saveVisit = (visit) => async (dispatch) => {
+    try {
+        const res = await axiosInstance.post(doctorUrl + "/visit", visit);
+        dispatch(setVisit(res.data));
+
+        return res;
     } catch (e) {
         console.log(e);
     }
 };
-
-export const saveVisit = (visit) => async (dispatch) => {
-    const res = await axiosInstance.post(doctorUrl + visitUrl);
-    // dispatch(setClient(res.data));
-
-    return res;
-};
-
-//
-// export const getRefresh = (refreshToken) => {
-//     const res = axiosInstance
-//         .get(authUrl + "/refresh", {
-//             headers: {
-//                 Authorization: `${refreshToken}`,
-//             },
-//         })
-//         .then(value => value.status)
-//         .catch(e => console.log(e));
-//
-//     return res;
-// };

@@ -12,13 +12,14 @@ export default memo(function InputSearch ({client, selectClient}) {
     const choseClient = (client) => {
         setInputSearch(`${client.surname} ${client.name}`);
         selectClient(client);
+        setClientsArray([]);
     };
 
     useEffect(() => {
-        if (client) {
+        if (client.name) {
             choseClient(client);
         } else if (clients.length) { setClientsArray(clients); }
-    }, [clients]);
+    }, [clients, client]);
 
     const getClientsDebounce = useDebounce(async (value) => {
         const clientRes = await getClients(value);
@@ -36,7 +37,7 @@ export default memo(function InputSearch ({client, selectClient}) {
     };
 
     return (
-        <div className={cl.searchChatDiv}>
+        <div className={cl.searchInputDiv}>
             <input
                 name={"massage"}
                 value={inputSearch}
@@ -45,19 +46,21 @@ export default memo(function InputSearch ({client, selectClient}) {
                 type="text"
                 autoComplete="off"
             />
-            <div className={cl.searchResultDiv}>
-                {
-                    inputSearch !== "" &&
-                    clientsArray.map(client =>
-                        <div className={cl.clientInfo} key={client._id} onClick={() => {
-                            setClientsArray([]);
-                            choseClient(client);
-                        }}>
-                            <span>{client.surname} </span>
-                            <span>{client.name}</span>
-                        </div>,
-                    )
-                }
+            <div>
+                <div className={cl.searchResultDiv}>
+                    {
+                        inputSearch !== "" &&
+                        clientsArray.map(client =>
+                            <div className={cl.clientInfo} key={client._id} onClick={() => {
+                                setClientsArray([]);
+                                choseClient(client);
+                            }}>
+                                <span>{client.surname} </span>
+                                <span>{client.name}</span>
+                            </div>,
+                        )
+                    }
+                </div>
             </div>
         </div>
     );

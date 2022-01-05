@@ -2,8 +2,8 @@ const doctorRouter = require('express').Router();
 
 const {Clients, O_Auth} = require('../dataBase');
 const {doctorController} = require('../controllers');
-const {mainMiddleware, authMiddleware} = require('../middlewares');
-const {clientValidator, queryValidator} = require('../validators');
+const {mainMiddleware, authMiddleware, doctorMiddleware} = require('../middlewares');
+const {clientValidator, queryValidator, visitValidator} = require('../validators');
 const {tokenEnum} = require("../configs");
 
 
@@ -26,8 +26,14 @@ doctorRouter.post(
     mainMiddleware.checkOne(Clients, 'phone'),
     doctorController.createClient
 );
-// todo createVisit
-doctorRouter.post('/visit', doctorController.createVisit);
+
+doctorRouter.post(
+    '/visit',
+    mainMiddleware.validateBody(visitValidator.visitValidate),
+    doctorMiddleware.checkClientIdToVisitMiddleware(),
+    authMiddleware.checkToken(O_Auth, tokenEnum.ACCESS),
+    doctorController.createVisit
+);
 
 doctorRouter.delete(
     '/client/:_id',

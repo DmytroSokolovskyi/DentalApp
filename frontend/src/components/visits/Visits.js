@@ -1,4 +1,5 @@
 import "react-datepicker/dist/react-datepicker.css";
+import {getVisits, saveVisit} from "../../services/doctor.service";
 import {useCallback, useEffect, useState} from "react";
 import Calendar from "../calendar/Calendar";
 import DatePicker from "react-datepicker";
@@ -7,77 +8,88 @@ import MyButton from "../UI/myButton/MyButton";
 import cl from "./Visits.module.scss";
 import uk from "date-fns/locale/uk";
 import {useFetch} from "../../hooks";
-import {getClientsAll, getVisits, saveVisit} from "../../services/doctor.service";
+import {useDispatch} from "react-redux";
+import {setDay} from "../../redux/actions";
 
 export default function Visits ({client}) {
-    const [chosenDay, setChosenDay] = useState("");
+    const [chosenDay, setChosenDay] = useState(new Date());
     const [visitsAll, setVisitsAll] = useState([]);
-    const [startEvent, setStartEvent] = useState("");
-    const [endEvent, setEndEvent] = useState("");
-    const [chosenClient, setChosenClient] = useState({});
-    const {goFetch, res} = useFetch();
-
-    console.log(res);
+    const [visit, setVisit] = useState({start: "", end: "", client: {}});
+    const {goFetch, data} = useFetch();
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        goFetch(getVisits(), false);
+        goFetch(getVisits(), true);
     }, []);
 
     const clickToDay = useCallback((day) => {
+        dispatch(setDay(day));
         setChosenDay(day);
     }, [],
     );
 
     const selectClient = useCallback((client) => {
-        setChosenClient(client);
-    }, [],
+        setVisit({...visit, client});
+    }, [visit],
     );
 
     const selectStartEnd = useCallback((select) => {
-        setStartEvent(select.start);
-        setEndEvent(select.end);
-    }, [],
+        setVisit({...visit, start: select.start, end: select.end});
+    }, [visit],
+    );
+
+    const selectVisit = useCallback((value) => {
+        setVisit({
+            client: value.client,
+            start: new Date(value.start),
+            end: new Date(value.end),
+        });
+    }, [visit],
     );
 
     const createNewVisit = () => {
-        const newVisit = {start: startEvent, end: endEvent, client: chosenClient.id};
-        goFetch(saveVisit(newVisit), true);
+        goFetch(saveVisit({...visit, client: visit.client._id}), true);
     };
 
     return (
         <div className={cl.visitsContainer}>
+            <div className={cl.calendardiv}>
+                <Calendar
+                    clickToDay={clickToDay}
+                    selectStartEnd={selectStartEnd}
+                    selectVisit={selectVisit}
+                />
+            </div>
             <div className={cl.visitsContent}>
                 <div className={cl.createVisit}>
                     <div className={cl.datePickerDiv}>
                         <DatePicker
-                            selected={startEvent}
-                            onChange={(date) => setStartEvent(date)}
+                            selected={visit.start}
+                            onChange={(date) => setVisit({...visit, start: date})}
                             showTimeSelect={true}
                             dateFormat="Pp"
                             locale ={uk}
                             placeholderText="Start"
                         />
                         <DatePicker
-                            selected={endEvent}
-                            onChange={(date) => setEndEvent(date)}
+                            selected={visit.end}
+                            onChange={(date) => setVisit({...visit, end: date})}
                             showTimeSelect={true}
                             dateFormat="Pp"
                             locale ={uk}
                             placeholderText="End"
                         />
+                        <InputSearch client={visit.client} selectClient={selectClient}/>
+                        <MyButton
+                            onClick={() => createNewVisit()}
+                        >
+                            Зберегти
+                        </MyButton>
                     </div>
-                    <InputSearch client={client} selectClient={selectClient}/>
-                    <MyButton onClick={() => createNewVisit()}> Зберегти </MyButton>
                 </div>
                 <div className={cl.visitsList}>
 
                 </div>
-            </div>
-            <div className={cl.calendardiv}>
-                <Calendar
-                    clickToDay={clickToDay}
-                    selectStartEnd={selectStartEnd}
-                />
             </div>
         </div>
     );
