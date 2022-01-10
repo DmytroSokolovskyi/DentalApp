@@ -54,7 +54,9 @@ doctorRouter.put('/client/:_id',
     authMiddleware.checkToken(O_Auth, tokenEnum.ACCESS),
     mainMiddleware.validateBody(clientValidator.clientEditValidate),
     mainMiddleware.checkUserIdMiddleware(Clients),
-    doctorController.updateClient);
+    doctorController.updateClient
+);
+
 doctorRouter.put('/visit/:visit_id', () => 'edit visit');
 
 module.exports = doctorRouter;

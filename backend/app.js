@@ -39,7 +39,6 @@ app.use(express.urlencoded({extended: true}));
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerJson));
 app.use('/auth', authRouter);
 app.use('/doctor', doctorRouter);
-app.use('/test', () => console.log("TEST"));
 app.use('*', errorMiddleware);
 
 app.listen(config.PORT,
